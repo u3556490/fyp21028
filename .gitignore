@@ -61,3 +61,7 @@ maildir
 
 .ipynb_checkpoints/
 models/
+
+# large files
+earlier_models.tar.gz
+ibtracs.csv
