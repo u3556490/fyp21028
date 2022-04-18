@@ -1,0 +1,6 @@
+conda create --name efyp conda-forge::sktime=0.10.0 pytorch::pytorch nvidia::cudatoolkit==11.0
+conda activate testing
+pip install xgboost
+pip install pygam
+python -c "import torch; print(torch.cuda.is_available())
+conda install jupyter matplotlib seaborn

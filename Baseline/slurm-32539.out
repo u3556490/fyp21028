@@ -1,0 +1,320 @@
+[22;0t]0;IPython: efyp/Baseline<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 44837 entries, 0 to 44836
+Data columns (total 68 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   LOW_IMPACT     44837 non-null  bool   
+ 1   MID_IMPACT     44837 non-null  bool   
+ 2   BIG_IMPACT     44837 non-null  bool   
+ 3   DIRECT_STRIKE  44837 non-null  bool   
+ 4   MM00           44837 non-null  int32  
+ 5   DD00           44837 non-null  int32  
+ 6   HH00           44837 non-null  int32  
+ 7   MI_STATUS00    44837 non-null  bool   
+ 8   LI_STATUS00    44837 non-null  bool   
+ 9   SI_STATUS00    44837 non-null  bool   
+ 10  DS_STATUS00    44837 non-null  bool   
+ 11  DIST00         44837 non-null  float64
+ 12  AZM00          44837 non-null  float64
+ 13  SPEED00        44837 non-null  int32  
+ 14  DIR00          44837 non-null  int32  
+ 15  VMAX00         44837 non-null  int32  
+ 16  DVMAX00        44837 non-null  int32  
+ 17  MM06           44837 non-null  int32  
+ 18  DD06           44837 non-null  int32  
+ 19  HH06           44837 non-null  int32  
+ 20  MI_STATUS06    44837 non-null  bool   
+ 21  LI_STATUS06    44837 non-null  bool   
+ 22  SI_STATUS06    44837 non-null  bool   
+ 23  DS_STATUS06    44837 non-null  bool   
+ 24  DIST06         44837 non-null  float64
+ 25  AZM06          44837 non-null  float64
+ 26  SPEED06        44837 non-null  int32  
+ 27  DIR06          44837 non-null  int32  
+ 28  VMAX06         44837 non-null  int32  
+ 29  DVMAX06        44837 non-null  int32  
+ 30  MM12           44837 non-null  int32  
+ 31  DD12           44837 non-null  int32  
+ 32  HH12           44837 non-null  int32  
+ 33  MI_STATUS12    44837 non-null  bool   
+ 34  LI_STATUS12    44837 non-null  bool   
+ 35  SI_STATUS12    44837 non-null  bool   
+ 36  DS_STATUS12    44837 non-null  bool   
+ 37  DIST12         44837 non-null  float64
+ 38  AZM12          44837 non-null  float64
+ 39  SPEED12        44837 non-null  int32  
+ 40  DIR12          44837 non-null  int32  
+ 41  VMAX12         44837 non-null  int32  
+ 42  DVMAX12        44837 non-null  int32  
+ 43  MM18           44837 non-null  int32  
+ 44  DD18           44837 non-null  int32  
+ 45  HH18           44837 non-null  int32  
+ 46  MI_STATUS18    44837 non-null  bool   
+ 47  LI_STATUS18    44837 non-null  bool   
+ 48  SI_STATUS18    44837 non-null  bool   
+ 49  DS_STATUS18    44837 non-null  bool   
+ 50  DIST18         44837 non-null  float64
+ 51  AZM18          44837 non-null  float64
+ 52  SPEED18        44837 non-null  int32  
+ 53  DIR18          44837 non-null  int32  
+ 54  VMAX18         44837 non-null  int32  
+ 55  DVMAX18        44837 non-null  int32  
+ 56  MM24           44837 non-null  int32  
+ 57  DD24           44837 non-null  int32  
+ 58  HH24           44837 non-null  int32  
+ 59  MI_STATUS24    44837 non-null  bool   
+ 60  LI_STATUS24    44837 non-null  bool   
+ 61  SI_STATUS24    44837 non-null  bool   
+ 62  DS_STATUS24    44837 non-null  bool   
+ 63  DIST24         44837 non-null  float64
+ 64  AZM24          44837 non-null  float64
+ 65  SPEED24        44837 non-null  int32  
+ 66  DIR24          44837 non-null  int32  
+ 67  VMAX24         44837 non-null  int32  
+dtypes: bool(24), float64(10), int32(34)
+memory usage: 10.3 MB
+None
+Training set size: 36317; Dev set size: 4036; Testing set size: 4484
+[TSNV] MLP Classifier hidden_layer_sizes=(3072, 1024, 1024, 1024, 256), batches 512, regularization alpha=0.01
+Iteration 1, loss = 5.07566815
+Iteration 2, loss = 0.52109646
+Iteration 3, loss = 0.49254062
+Iteration 4, loss = 0.47176468
+Iteration 5, loss = 0.46467776
+Iteration 6, loss = 0.46267487
+Iteration 7, loss = 0.45820845
+Iteration 8, loss = 0.44905895
+Iteration 9, loss = 0.44592584
+Iteration 10, loss = 0.43579174
+Iteration 11, loss = 0.43468273
+Iteration 12, loss = 0.42535431
+Iteration 13, loss = 0.42797545
+Iteration 14, loss = 0.41687676
+Iteration 15, loss = 0.41759091
+Iteration 16, loss = 0.42727528
+Iteration 17, loss = 0.41143965
+Iteration 18, loss = 0.40731083
+Iteration 19, loss = 0.41641286
+Iteration 20, loss = 0.40209870
+Iteration 21, loss = 0.40556279
+Iteration 22, loss = 0.40900870
+Iteration 23, loss = 0.39554696
+Iteration 24, loss = 0.39291187
+Iteration 25, loss = 0.39390129
+Iteration 26, loss = 0.39019881
+Iteration 27, loss = 0.38316208
+Iteration 28, loss = 0.40480364
+Iteration 29, loss = 0.38890948
+Iteration 30, loss = 0.37788786
+Iteration 31, loss = 0.38461791
+Iteration 32, loss = 0.37632458
+Iteration 33, loss = 0.37318756
+Iteration 34, loss = 0.36987647
+Iteration 35, loss = 0.36148611
+Iteration 36, loss = 0.36228150
+Iteration 37, loss = 0.36313330
+Iteration 38, loss = 0.35716592
+Iteration 39, loss = 0.37025427
+Iteration 40, loss = 0.34807902
+Iteration 41, loss = 0.36112464
+Iteration 42, loss = 0.34698141
+Iteration 43, loss = 0.34680944
+Iteration 44, loss = 0.35129088
+Iteration 45, loss = 0.35069998
+Iteration 46, loss = 0.33103290
+Iteration 47, loss = 0.33858026
+Iteration 48, loss = 0.34632251
+Iteration 49, loss = 0.33220738
+Iteration 50, loss = 0.32397959
+Iteration 51, loss = 0.33076292
+Iteration 52, loss = 0.31785264
+Iteration 53, loss = 0.33274147
+Iteration 54, loss = 0.32155420
+Iteration 55, loss = 0.31781697
+Iteration 56, loss = 0.32529642
+Iteration 57, loss = 0.30387791
+Iteration 58, loss = 0.30244296
+Iteration 59, loss = 0.32012885
+Iteration 60, loss = 0.29769330
+Iteration 61, loss = 0.30145458
+Iteration 62, loss = 0.30135631
+Iteration 63, loss = 0.29912647
+Iteration 64, loss = 0.30104602
+Iteration 65, loss = 0.28831502
+Iteration 66, loss = 0.28842921
+Iteration 67, loss = 0.29003592
+Iteration 68, loss = 0.29608730
+Iteration 69, loss = 0.27799560
+Iteration 70, loss = 0.28210388
+Iteration 71, loss = 0.27801698
+Iteration 72, loss = 0.28846918
+Iteration 73, loss = 0.27446712
+Iteration 74, loss = 0.27293644
+Iteration 75, loss = 0.26343387
+Iteration 76, loss = 0.26542096
+Iteration 77, loss = 0.27407912
+Iteration 78, loss = 0.26484318
+Iteration 79, loss = 0.24952559
+Iteration 80, loss = 0.25874537
+Iteration 81, loss = 0.25410382
+Iteration 82, loss = 0.25327013
+Iteration 83, loss = 0.26081773
+Iteration 84, loss = 0.25672533
+Iteration 85, loss = 0.24415106
+Iteration 86, loss = 0.24015040
+Iteration 87, loss = 0.25838196
+Iteration 88, loss = 0.23912883
+Iteration 89, loss = 0.24396218
+Iteration 90, loss = 0.22815170
+Iteration 91, loss = 0.24772456
+Iteration 92, loss = 0.23343014
+Iteration 93, loss = 0.21887070
+Iteration 94, loss = 0.22105094
+Iteration 95, loss = 0.22115734
+Iteration 96, loss = 0.22214591
+Iteration 97, loss = 0.23615669
+Iteration 98, loss = 0.23076849
+Iteration 99, loss = 0.20068400
+Iteration 100, loss = 0.21781288
+Iteration 101, loss = 0.20647552
+Iteration 102, loss = 0.19053581
+Iteration 103, loss = 0.20587139
+Iteration 104, loss = 0.20841238
+Iteration 105, loss = 0.21723744
+Iteration 106, loss = 0.19887061
+Iteration 107, loss = 0.19157621
+Iteration 108, loss = 0.17510892
+Iteration 109, loss = 0.19450234
+Iteration 110, loss = 0.18274041
+Iteration 111, loss = 0.18946525
+Iteration 112, loss = 0.17520560
+Iteration 113, loss = 0.16123367
+Iteration 114, loss = 0.17352311
+Iteration 115, loss = 0.17196028
+Iteration 116, loss = 0.15325745
+Iteration 117, loss = 0.17012790
+Iteration 118, loss = 0.16609537
+Iteration 119, loss = 0.15916473
+Iteration 120, loss = 0.15135338
+Iteration 121, loss = 0.14377874
+Iteration 122, loss = 0.15814054
+Iteration 123, loss = 0.16089347
+Iteration 124, loss = 0.16177712
+Iteration 125, loss = 0.13440827
+Iteration 126, loss = 0.13232434
+Iteration 127, loss = 0.15586730
+Iteration 128, loss = 0.13133082
+Iteration 129, loss = 0.13320164
+Iteration 130, loss = 0.12529076
+Iteration 131, loss = 0.16686126
+Iteration 132, loss = 0.12886621
+Iteration 133, loss = 0.11274362
+Iteration 134, loss = 0.14908652
+Iteration 135, loss = 0.15775046
+Iteration 136, loss = 0.11572671
+Iteration 137, loss = 0.11076105
+Iteration 138, loss = 0.10901200
+Iteration 139, loss = 0.11035802
+Iteration 140, loss = 0.14452299
+Iteration 141, loss = 0.11478333
+Iteration 142, loss = 0.14408669
+Iteration 143, loss = 0.09705289
+Iteration 144, loss = 0.13479284
+Iteration 145, loss = 0.09896357
+Iteration 146, loss = 0.08716728
+Iteration 147, loss = 0.15360973
+Iteration 148, loss = 0.12632012
+Iteration 149, loss = 0.13392293
+Iteration 150, loss = 0.10169727
+Iteration 151, loss = 0.09956811
+Iteration 152, loss = 0.09869637
+Iteration 153, loss = 0.10331317
+Iteration 154, loss = 0.09457775
+Iteration 155, loss = 0.10323898
+Iteration 156, loss = 0.11131443
+Iteration 157, loss = 0.09768721
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Best Threshold=0.32311, F-Score=0.83081
+Best Threshold=0.50209, F-Score=0.81633
+Best Threshold=0.74931, F-Score=0.75362
+Best Threshold=0.29005, F-Score=0.79739
+              precision    recall  f1-score   support
+
+           0    0.84078   0.81793   0.82920       368
+           1    0.86905   0.76573   0.81413       286
+           2    0.82796   0.68142   0.74757       113
+           3    0.89552   0.70588   0.78947        85
+
+   micro avg    0.85325   0.77113   0.81011       852
+   macro avg    0.85833   0.74274   0.79509       852
+weighted avg    0.85403   0.77113   0.80935       852
+ samples avg    0.09677   0.09209   0.09241       852
+
+[TSNV] MLP Regressor hidden_layer_sizes=(3072, 1024, 1024, 1024, 256), batches 512, regularization alpha=0.01
+Iteration 1, loss = 3587.46275023
+Iteration 2, loss = 2.23855246
+Iteration 3, loss = 7.47599316
+Iteration 4, loss = 0.07896569
+Iteration 5, loss = 2.54154361
+Iteration 6, loss = 0.08615307
+Iteration 7, loss = 1.50334757
+Iteration 8, loss = 0.87615252
+Iteration 9, loss = 0.05182829
+Iteration 10, loss = 0.05063949
+Iteration 11, loss = 0.04860751
+Iteration 12, loss = 0.04886778
+Iteration 13, loss = 0.10552044
+Iteration 14, loss = 1.20682914
+Iteration 15, loss = 0.05398544
+Iteration 16, loss = 0.16519234
+Iteration 17, loss = 0.05529086
+Iteration 18, loss = 0.47813059
+Iteration 19, loss = 0.06071247
+Iteration 20, loss = 0.04512697
+Iteration 21, loss = 0.04471914
+Iteration 22, loss = 0.04461687
+Iteration 23, loss = 0.09096613
+Iteration 24, loss = 0.19432431
+Iteration 25, loss = 0.12362638
+Iteration 26, loss = 0.04459072
+Iteration 27, loss = 0.27301167
+Iteration 28, loss = 0.04588217
+Iteration 29, loss = 0.04416376
+Iteration 30, loss = 0.04378695
+Iteration 31, loss = 0.04347325
+Iteration 32, loss = 0.04331403
+Iteration 33, loss = 0.21209575
+Iteration 34, loss = 0.05385928
+Iteration 35, loss = 0.04362880
+Iteration 36, loss = 0.04308500
+Iteration 37, loss = 0.04258964
+Iteration 38, loss = 0.04618480
+Iteration 39, loss = 0.04226912
+Iteration 40, loss = 0.04646013
+Iteration 41, loss = 0.07991192
+Iteration 42, loss = 0.04273340
+Iteration 43, loss = 0.78189217
+Iteration 44, loss = 0.05592537
+Iteration 45, loss = 0.09006387
+Iteration 46, loss = 0.06229348
+Iteration 47, loss = 0.06045042
+Iteration 48, loss = 0.04326360
+Iteration 49, loss = 0.04251013
+Iteration 50, loss = 0.04225682
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Best Threshold=0.33982, F-Score=0.60845
+Best Threshold=0.28110, F-Score=0.58642
+Best Threshold=0.20678, F-Score=0.51406
+Best Threshold=0.21914, F-Score=0.45752
+              precision    recall  f1-score   support
+
+           0    0.63050   0.58424   0.60649       368
+           1    0.52355   0.66084   0.58423       286
+           2    0.46667   0.55752   0.50806       113
+           3    0.50746   0.40000   0.44737        85
+
+   micro avg    0.55420   0.58803   0.57062       852
+   macro avg    0.53204   0.55065   0.53654       852
+weighted avg    0.56059   0.58803   0.57009       852
+ samples avg    0.06050   0.06919   0.06052       852
+

@@ -1,0 +1,52 @@
+/userhome/cs/u3556490/efyp/Experimental/experimental_mlp.py:188: RuntimeWarning: invalid value encountered in true_divide
+  fscore = (2 * precision * recall) / (precision + recall)
+[22;0t]0;IPython: efyp/ExperimentalTraining set size: 5633; Dev set size: 626; Testing set size: 696
+Iteration 1, loss = 34539.63883186
+Iteration 2, loss = 84.72473097
+Iteration 3, loss = 179.21304016
+Iteration 4, loss = 1.37924673
+Iteration 5, loss = 0.24358745
+Iteration 6, loss = 0.28076040
+Iteration 7, loss = 0.25346483
+Iteration 8, loss = 0.26940971
+Iteration 9, loss = 0.35388200
+Iteration 10, loss = 0.48235252
+Iteration 11, loss = 1.69031683
+Iteration 12, loss = 1.37307567
+Iteration 13, loss = 3.59425015
+Iteration 14, loss = 0.54603832
+Iteration 15, loss = 1.94111250
+Iteration 16, loss = 1.04433506
+Training loss did not improve more than tol=0.000100 for 10 consecutive epochs. Stopping.
+Best Threshold=0.49537, F-Score=0.31579
+Best Threshold=0.13925, F-Score=0.12381
+Best Threshold=0.02824, F-Score=0.17143
+Best Threshold=0.13593, F-Score=0.10811
+Brier score losses: (the smaller the better)
+Class 0, no calibration: 0.083219
+Class 1, no calibration: 0.815086
+Class 2, no calibration: 0.030803
+Class 3, no calibration: 0.031252
+              precision    recall  f1-score   support
+
+           0    0.78571   0.18033   0.29333        61
+           1    0.06441   0.97436   0.12083        39
+           2    0.14286   0.10000   0.11765        20
+           3    0.05882   0.05263   0.05556        19
+
+   micro avg    0.08189   0.37410   0.13437       139
+   macro avg    0.26295   0.32683   0.14684       139
+weighted avg    0.39148   0.37410   0.18715       139
+ samples avg    0.05937   0.03674   0.03969       139
+
+!===============================!
+Test 1 ----------------- 
+{'mean_fit_time': array([17204.10574841,  3912.49032283, 17125.99074475, 16245.18960365,
+       11108.97341077]), 'std_fit_time': array([1297.33496421,  571.86851661, 1062.5506591 , 2880.1249227 ,
+        453.20436611]), 'mean_score_time': array([2.53594573, 0.85414322, 2.30991666, 2.51824625, 1.9179821 ]), 'std_score_time': array([0.17610832, 0.04086459, 0.05708891, 0.29108078, 0.07926354]), 'param_hidden_layer_sizes': masked_array(data=[(3072, 2048, 1024, 256), (3072, 512, 256, 256),
+                   (3072, 2048, 512, 128), (3072, 2048, 1024, 1024, 512),
+                   (3072, 2048, 1024, 256, 128)],
+             mask=[False, False, False, False, False],
+       fill_value='?',
+            dtype=object), 'params': [{'hidden_layer_sizes': (3072, 2048, 1024, 256)}, {'hidden_layer_sizes': (3072, 512, 256, 256)}, {'hidden_layer_sizes': (3072, 2048, 512, 128)}, {'hidden_layer_sizes': (3072, 2048, 1024, 1024, 512)}, {'hidden_layer_sizes': (3072, 2048, 1024, 256, 128)}], 'split0_test_score': array([0.6152773 , 0.44402294, 0.48497416, 0.44658403, 0.5975047 ]), 'split1_test_score': array([0.56363223, 0.47771018, 0.55703669, 0.5082489 , 0.50758429]), 'split2_test_score': array([0.53721719, 0.55507159, 0.58213772, 0.29811153, 0.48692644]), 'mean_test_score': array([0.57204224, 0.49226824, 0.54138286, 0.41764815, 0.53067181]), 'std_test_score': array([0.03241801, 0.04648945, 0.04118229, 0.08819445, 0.04800461]), 'rank_test_score': array([1, 4, 2, 5, 3], dtype=int32)}
+{'hidden_layer_sizes': (3072, 2048, 1024, 256)}
