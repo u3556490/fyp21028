@@ -62,4 +62,4 @@ maildir
 .ipynb_checkpoints/
 models/
 
-!./*/models/*.md
+!*/Baseline/models/*.md
