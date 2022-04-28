@@ -1,0 +1,442 @@
+MIME-Version: 1.0
+Date: Fri, 21 Jan 2022 09:25:16 +0800
+References: <13A1489F-6E2A-48AD-9EAC-3FB664D67125@cs.hku.hk>
+	<CAM91QtL1Jkgq3ZRAqjg_7p33u2pA+c5oArys4Mgq_a6UgPeu+A@mail.gmail.com>
+	<8FD1E30E-593E-4CF2-914B-94DF0ABC40A0@cs.hku.hk>
+In-Reply-To: <8FD1E30E-593E-4CF2-914B-94DF0ABC40A0@cs.hku.hk>
+Message-ID: <CAM91QtL7bV2=temoCuxrnd2egZDQUATYR1tbtVpSQderz8YYzw@mail.gmail.com>
+Subject: Re: FYP-2021 Intermediate Presentation
+From: "Fong, Kwan Ching" <u3556490@connect.hku.hk>
+To: =?UTF-8?B?6JGJ5b+X56uLIFlJUCBDaGkgTGFwIFtCZXRhXQ==?= <clyip@cs.hku.hk>
+Cc: =?UTF-8?B?6JGJ5b+X56uLIFlpcCBDaGkgTGFwIFtCZXRhXQ==?= <clyip@cs.hku.hk>, 
+	=?UTF-8?B?6JSh57a655OKIENob2kgWWkgS2luZyBbTG9yZXR0YV0=?= <ykchoi@cs.hku.hk>
+Content-Type: multipart/alternative; boundary="000000000000c2d71205d60d7d87"
+
+--000000000000c2d71205d60d7d87
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dear Dr Yip,
+
+Thanks for the reply. The following are several sets of parameters and NN
+architectures:
+
+1.
+
+Model structure:
+
+self.fc =3D nn.Sequential(
+            nn.Linear(18, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 4),
+            nn.Sigmoid()
+        )
+
+Parameters:
+
+TRAIN_RATIO =3D 0.85
+NUM_EPOCHS =3D 300
+LR =3D 0.01
+BATCH_SIZE =3D 32
+
+criterion =3D nn.BCELoss()
+optimizer =3D SGD(model.parameters(), lr=3DLR)
+acc =3D sklearn.metrics.accuracy_score(target, preds)
+
+The predictions are rounded to the nearest integer (0 or 1) before
+being passed to the accuracy scorer.
+
+2.
+
+Model:
+self.fc =3D nn.Sequential(
+    nn.Linear(18, 128),
+    nn.ReLU(),
+    nn.Linear(128, 128),
+    nn.ReLU(),
+    nn.Linear(128, 64),
+    nn.ReLU(),
+    nn.Linear(64, 32),
+    nn.ReLU(),
+    nn.Linear(32, 4),
+    nn.Sigmoid() )
+
+Parameters:
+TRAIN_RATIO =3D 0.85
+NUM_EPOCHS =3D 1000
+LR =3D 0.01
+BATCH_SIZE =3D 128
+criterion =3D nn.BCELoss()
+optimizer =3D Adam(model.parameters(), lr=3DLR)
+acc =3D sklearn.metrics.accuracy_score(target, preds)
+
+
+3.
+
+Model:
+self.fc =3D nn.Sequential(
+    nn.Linear(18, 256),
+    nn.ReLU(),
+    nn.Linear(256, 256), # 9 such identical hidden layers
+    nn.ReLU(), # 9 such activations
+    nn.Linear(256, 64),
+    nn.ReLU(),
+    nn.Linear(64, 4),
+    nn.Sigmoid()
+)
+
+Parameters:
+TRAIN_RATIO =3D 0.85
+NUM_EPOCHS =3D 1000
+LR =3D 0.01
+BATCH_SIZE =3D 128
+criterion =3D nn.BCELoss()
+optimizer =3D Adam(model.parameters(), lr=3DLR)
+acc =3D sklearn.metrics.accuracy_score(target, preds)
+
+There is also a configuration with the same parameters but the 9
+layers in the middle have 1024 neurons instead.
+In addition, the same MLP modelling attempts were repeated using
+sklearn instead of pytorch, but none was ever successful in the
+slightest.
+
+For feature selection using understanding of the physics behind, it is
+certainly an important thing.
+I am sorry that I forgot to mention that interaction terms were
+computed first before PCA was used to reduce the dimensionality,
+because the untransformed dataset is small enough to directly work
+with,
+
+but not the one with 1300 interaction terms. Following the procedures
+used by Neumann when he devised the original CLIPER,
+F-test was carried out to select the more useful predictors from among
+the 1300, but it typically chose position-related terms only (because
+these explain most of the variance in the data),
+which was far from sufficient. Therefore I switched to PCA, which can
+find more sensible candidates.
+
+Regards,
+
+Fong Kwan Ching
+
+Student
+
+P.S. The typesetting of this email seems to be somewhat broken, please
+accept my apology for that.
+
+
+
+
+On Thu, Jan 20, 2022 at 2:33 PM "=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [B=
+eta]" <clyip@cs.hku.hk>
+wrote:
+
+> Hi,
+>
+> * MLP: Interesting; can you outline in more detail what you have explored=
+,
+> like which NN architecture, the parameters, and the attributes used?
+>
+> * PCA may be useful to find out the principal axes of linearly independen=
+t
+> data, but it's always good to identify the right features by understandin=
+g
+> the physics of the problem behind.
+>
+> Regards,
+>   =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].
+>   PhD BEng(CompEng) FHKMetSoc MACM MIEEE
+>   Department of Computer Science,
+>   The University of Hong Kong.
+>
+>
+>
+> On 14 Jan 2022, at 15:03, Fong, Kwan Ching <u3556490@connect.hku.hk>
+> wrote:
+>
+> Dear Dr Yip,
+>
+> Thank you for the feedback. I would like to add a few comments to the
+> issues you and Dr Choi raised:
+>
+> - The MLP structure has been varied quite a number of times, ranging from
+> small structures (1-3 hidden layers with 32-64 neurons each) to large one=
+s
+> (10 hidden layers with 1024 neurons each) and nothing seemed to work,
+> regardless of hyperparameter choices. The same results were observed when=
+ I
+> used scikit-learn
+> <https://scikit-learn.org/stable/modules/generated/sklearn.neural_network=
+.MLPClassifier.html#sklearn.neural_network.MLPClassifier>
+> instead of PyTorch
+> <https://pytorch.org/docs/stable/generated/torch.nn.Linear.html> to build
+> the MLPs.
+>
+> - I agree that some smoothing or additional preprocessing will be
+> beneficial. At the moment, I am trying to use tools such as PCA to extrac=
+t
+> the most useful information out of the dataset, but the preliminary resul=
+ts
+> seem to suggest more than 99.8% of the variance needs to be kept, otherwi=
+se
+> the models downstream will suffer severely.
+>
+> - Model comparisons are carried out in a tripartite manner:
+>   Statistical-dynamical model vs custom-built baseline: There are no
+> directly/exactly comparable controls that I can use, so custom baselines
+> need to be built in order to justify the addition of dynamical data.
+>   Baseline vs HKWW: While HKWW's model is only a close analogue of what I
+> am trying to achieve, it is used to check whether a sensible baseline is
+> built.
+>   I surmise this is a sufficiently reasonable method.
+>
+> - Probability of impact levels =3D probability of some warning signals?
+>   In short, yes, because warning signals are taken as a proxy of the
+> impact levels. The assumption is that the signals represent impact levels
+> well enough. An authoritative and quantitative impact level measurement
+> cannot be found, thus a combination of warning signals and TC closeness
+> (<100km?) are taken as stand-ins.
+>
+> - What is needed to transfer this study to other cities?
+>   A measure of impact level will then be needed, especially if the city i=
+n
+> question does not have a warning signals system that works like Hong Kong
+> and Macau's. For instance, in Taiwan, TC warnings do not necessarily enco=
+de
+> impact levels well. The other data sources will be identical, but the
+> calculation of feature variables may be somewhat different (the latest
+> revision to the baseline dataset involves calculating the radial distance
+> and forward azimuth
+> <https://en.wikipedia.org/wiki/Polar_coordinate_system> to the city in
+> question).
+>
+> - Why are the date/time values in int64?
+>   The models do not accept timestamps, thus they have to be separated int=
+o
+> MM, DD and HH, each an integer. The default integer data type in Pandas i=
+s
+> int64 and despite the memory wastage (only 8 bits are needed) I kept it
+> that way to minimize potential compatibility issues when passing the data
+> around different packages.
+>
+> I hope these have answered your questions. I will take them into
+> consideration when I write the interim report later. Should you have
+> further questions, please simply write back.
+>
+> Best regards,
+> FONG Kwan Ching
+> Student
+>
+>
+> On Thu, Jan 13, 2022 at 7:29 PM "=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap =
+[Beta]" <clyip@cs.hku.hk>
+> wrote:
+>
+>> Hi,
+>>
+>>     Here it is the notes I jotted down during your presentation.
+>>
+>> Regards,
+>>   =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].
+>>   PhD BEng(CompEng) FHKMetSoc MACM MIEEE
+>>   Department of Computer Science,
+>>   The University of Hong Kong.
+>>
+>>
+>
+
+--000000000000c2d71205d60d7d87
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Dear Dr Yip,</div><div><br></div><div>Thanks for the =
+reply. The following are several sets of parameters and NN architectures:</=
+div><div><br></div><div>1.<br><p>Model structure:</p>
+<pre><code>self.fc =3D nn.Sequential(
+            nn.Linear(18, 128),
+            nn.ReLU(),
+            nn.Linear(128, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 4),=20
+            nn.Sigmoid()
+        )</code></pre><p>Parameters:</p>
+<pre><code>TRAIN_RATIO =3D 0.85
+NUM_EPOCHS =3D 300
+LR =3D 0.01
+BATCH_SIZE =3D 32
+
+criterion =3D nn.BCELoss()
+optimizer =3D SGD(model.parameters(), lr=3DLR)
+acc =3D sklearn.metrics.accuracy_score(target, preds)<br></code></pre><pre>=
+<code><font face=3D"arial,sans-serif">The predictions are rounded to the ne=
+arest integer (0 or 1) before being passed to the accuracy scorer.</font><b=
+r></code></pre><pre><code><font face=3D"arial,sans-serif">2.=20
+</font></code></pre><p>Model:</p>
+<code>self.fc =3D nn.Sequential( <br></code></div><div><code>=C2=A0=C2=A0=
+=C2=A0 nn.Linear(18, 128), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 n=
+n.ReLU(), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.Linear(128, 128=
+), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.ReLU(), <br></code></d=
+iv><div><code>=C2=A0=C2=A0=C2=A0 nn.Linear(128, 64),=C2=A0=C2=A0 <br></code=
+></div><div><code>=C2=A0=C2=A0=C2=A0 nn.ReLU(), <br></code></div><div><code=
+>=C2=A0=C2=A0=C2=A0 nn.Linear(64, 32), <br></code></div><div><code>=C2=A0=
+=C2=A0=C2=A0 nn.ReLU(), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.L=
+inear(32, 4), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.Sigmoid()
+        )</code><p>Parameters:</p>
+<code>TRAIN_RATIO =3D 0.85 <br></code></div><div><code>NUM_EPOCHS =3D 1000 =
+<br></code></div><div><code>LR =3D 0.01 <br></code></div><div><code>BATCH_S=
+IZE =3D 128 <br></code></div><div><code>criterion =3D nn.BCELoss() <br></co=
+de></div><div><code>optimizer =3D Adam(model.parameters(), lr=3DLR) <br></c=
+ode></div><div><code>acc =3D sklearn.metrics.accuracy_score(target, preds)<=
+/code><br><code></code><code></code><pre><code><font face=3D"arial,sans-ser=
+if"><br>3.=20
+</font></code></pre><p>Model:</p>
+<code>self.fc =3D nn.Sequential( <br></code></div><div><code>=C2=A0=C2=A0=
+=C2=A0 nn.Linear(18, 256), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 n=
+n.ReLU(), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.Linear(256, 256=
+), # 9 such identical hidden layers <br></code></div><div><code>=C2=A0=C2=
+=A0=C2=A0 nn.ReLU(),           # 9 such activations <br></code></div><div><=
+code>=C2=A0=C2=A0=C2=A0 nn.Linear(256, 64), <br></code></div><div><code>=C2=
+=A0=C2=A0=C2=A0 nn.ReLU(), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 n=
+n.Linear(64, 4), <br></code></div><div><code>=C2=A0=C2=A0=C2=A0 nn.Sigmoid(=
+) <br></code></div><div><code>)</code><p>Parameters:</p>
+<code>TRAIN_RATIO =3D 0.85 <br></code></div><div><code>NUM_EPOCHS =3D 1000 =
+<br></code></div><div><code>LR =3D 0.01 <br></code></div><div><code>BATCH_S=
+IZE =3D 128</code></div><div><code>criterion =3D nn.BCELoss() <br></code></=
+div><div><code>optimizer =3D Adam(model.parameters(), lr=3DLR) <br></code><=
+/div><div><code>acc =3D sklearn.metrics.accuracy_score(target, preds)</code=
+>
+
+<pre><code><font face=3D"arial,sans-serif">There is also a configuration wi=
+th the same parameters but the 9 layers in the middle have 1024 neurons ins=
+tead. <br>In addition, the same MLP modelling attempts were repeated using =
+sklearn instead of pytorch, but none was ever successful in the slightest.<=
+/font></code></pre><pre><code><font face=3D"arial,sans-serif">For feature s=
+election using understanding of the physics behind, it is certainly an impo=
+rtant thing. <br>I am sorry that I forgot to mention that interaction terms=
+ were computed first before PCA was used to reduce the dimensionality, beca=
+use the untransformed dataset is small enough to directly work with,<br></f=
+ont></code></pre><pre><code><font face=3D"arial,sans-serif">but not the one=
+ with 1300 interaction terms. Following the procedures used by Neumann when=
+ he devised the original CLIPER, <br>F-test was carried out to select the m=
+ore useful predictors from among the 1300, but it typically chose position-=
+related terms only (because these explain most of the variance in the data)=
+,<br>which was far from sufficient. Therefore I switched to PCA, which can =
+find more sensible candidates.<br><br></font></code></pre><pre><code><font =
+face=3D"arial,sans-serif">Regards,<br></font></code></pre><pre><code><font =
+face=3D"arial,sans-serif">Fong Kwan Ching<br></font></code></pre><pre><code=
+><font face=3D"arial,sans-serif">Student<br><br></font></code></pre><pre><c=
+ode><font face=3D"arial,sans-serif">P.S. The typesetting of this email seem=
+s to be somewhat broken, please accept my apology for that.<br></font></cod=
+e></pre><pre><code><br><br></code></pre>
+
+</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_=
+attr">On Thu, Jan 20, 2022 at 2:33 PM &quot;=E8=91=89=E5=BF=97=E7=AB=8B YIP=
+ Chi Lap [Beta]&quot; &lt;<a href=3D"mailto:clyip@cs.hku.hk" target=3D"_bla=
+nk">clyip@cs.hku.hk</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
+e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
+;padding-left:1ex"><div><span style=3D"color:rgb(0,0,0);font-family:Monaco"=
+>Hi,</span><br><div><div style=3D"color:rgb(0,0,0);letter-spacing:normal;te=
+xt-align:start;text-indent:0px;text-transform:none;white-space:normal;word-=
+spacing:0px"><div style=3D"color:rgb(0,0,0);font-variant:normal;letter-spac=
+ing:normal;line-height:normal;text-indent:0px;text-transform:none;white-spa=
+ce:normal;word-spacing:0px"><div style=3D"color:rgb(0,0,0);font-variant:nor=
+mal;letter-spacing:normal;line-height:normal;text-indent:0px;text-transform=
+:none;white-space:normal;word-spacing:0px"><font face=3D"Monaco"><span styl=
+e=3D"border-collapse:separate;font-variant-ligatures:normal;font-variant-ea=
+st-asian:normal;line-height:normal;border-spacing:0px"><div><span style=3D"=
+border-collapse:separate;color:rgb(0,0,0);font-variant:normal;letter-spacin=
+g:normal;line-height:normal;text-indent:0px;text-transform:none;white-space=
+:normal;word-spacing:0px;border-spacing:0px"><div><span style=3D"border-col=
+lapse:separate;color:rgb(0,0,0);font-variant:normal;letter-spacing:normal;l=
+ine-height:normal;text-indent:0px;text-transform:none;white-space:normal;wo=
+rd-spacing:0px;border-spacing:0px"><div><span style=3D"border-collapse:sepa=
+rate;color:rgb(0,0,0);font-variant:normal;letter-spacing:normal;line-height=
+:normal;text-indent:0px;text-transform:none;white-space:normal;word-spacing=
+:0px;border-spacing:0px"><div><div><br></div><div>* MLP: Interesting; can y=
+ou outline in more detail what you have explored, like which NN architectur=
+e, the parameters, and the attributes used?</div><div><br></div><div>* PCA =
+may be useful to find out the principal axes of linearly independent data, =
+but it&#39;s always good to identify the right features by understanding th=
+e physics of the problem behind.</div><div><br></div><div>Regards,</div><di=
+v>=C2=A0 =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].</div><div>=C2=A0=
+=C2=A0PhD BEng(CompEng) FHKMetSoc MACM MIEEE</div><div>=C2=A0=C2=A0Departme=
+nt of Computer Science,</div><div>=C2=A0 The University of Hong Kong.</div>=
+<div><br></div><div><br></div></div></span></div></span></div></span></div>=
+</span></font></div></div></div>
+</div>
+<div><br><blockquote type=3D"cite"><div>On 14 Jan 2022, at 15:03, Fong, Kwa=
+n Ching &lt;<a href=3D"mailto:u3556490@connect.hku.hk" target=3D"_blank">u3=
+556490@connect.hku.hk</a>&gt; wrote:</div><br><div><div dir=3D"ltr"><div>De=
+ar Dr Yip,</div><div><br></div><div>Thank you for the feedback. I would lik=
+e to add a few comments to the issues you and Dr Choi raised:</div><div><br=
+></div><div>- The MLP structure has been varied quite a number of times, ra=
+nging from small structures (1-3 hidden layers with 32-64 neurons each) to =
+large ones (10 hidden layers with 1024 neurons each) and nothing seemed to =
+work, regardless of hyperparameter choices. The same results were observed =
+when I used <a href=3D"https://scikit-learn.org/stable/modules/generated/sk=
+learn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifie=
+r" target=3D"_blank">scikit-learn</a> instead of <a href=3D"https://pytorch=
+.org/docs/stable/generated/torch.nn.Linear.html" target=3D"_blank">PyTorch<=
+/a> to build the MLPs.</div><div><br></div><div>- I agree that some smoothi=
+ng or additional preprocessing will be beneficial. At the moment, I am tryi=
+ng to use tools such as PCA to extract the most useful information out of t=
+he dataset, but the preliminary results seem to suggest more than 99.8% of =
+the variance needs to be kept, otherwise the models downstream will suffer =
+severely.<br></div><div><br></div><div>- Model comparisons are carried out =
+in a tripartite manner:</div><div>=C2=A0 Statistical-dynamical model vs cus=
+tom-built baseline: There are no directly/exactly comparable controls that =
+I can use, so custom baselines need to be built in order to justify the add=
+ition of dynamical data.</div><div>=C2=A0 Baseline vs HKWW: While HKWW&#39;=
+s model is only a close analogue of what I am trying to achieve, it is used=
+ to check whether a sensible baseline is built.</div><div>=C2=A0 I surmise =
+this is a sufficiently reasonable method.<br></div><div><br></div><div>- Pr=
+obability of impact levels =3D probability of some warning signals?</div><d=
+iv>=C2=A0 In short, yes, because warning signals are taken as a proxy of th=
+e impact levels. The assumption is that the signals represent impact levels=
+ well enough. An authoritative and quantitative impact level measurement ca=
+nnot be found, thus a combination of warning signals and TC closeness (&lt;=
+100km?) are taken as stand-ins.<br></div><div><br></div><div>- What is need=
+ed to transfer this study to other cities?</div><div>=C2=A0 A measure of im=
+pact level will then be needed, especially if the city in question does not=
+ have a warning signals system that works like Hong Kong and Macau&#39;s. F=
+or instance, in Taiwan, TC warnings do not necessarily encode impact levels=
+ well. The other data sources will be identical, but the calculation of fea=
+ture variables may be somewhat different (the latest revision to the baseli=
+ne dataset involves calculating the <a href=3D"https://en.wikipedia.org/wik=
+i/Polar_coordinate_system" target=3D"_blank">radial distance and forward az=
+imuth</a> to the city in question).</div><div><br></div><div>- Why are the =
+date/time values in int64?</div><div>=C2=A0 The models do not accept timest=
+amps, thus they have to be separated into MM, DD and HH, each an integer. T=
+he default integer data type in Pandas is int64 and despite the memory wast=
+age (only 8 bits are needed) I kept it that way to minimize potential compa=
+tibility issues when passing the data around different packages.</div><div>=
+<br></div><div>I hope these have answered your questions. I will take them =
+into consideration when I write the interim report later. Should you have f=
+urther questions, please simply write back.</div><div><br></div><div>Best r=
+egards,</div><div>FONG Kwan Ching</div><div>Student<br></div><div><br></div=
+></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr"=
+>On Thu, Jan 13, 2022 at 7:29 PM &quot;=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi =
+Lap [Beta]&quot; &lt;<a href=3D"mailto:clyip@cs.hku.hk" target=3D"_blank">c=
+lyip@cs.hku.hk</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">Hi,<br>
+<br>
+=C2=A0 =C2=A0 Here it is the notes I jotted down during your presentation.<=
+br>
+<br>
+Regards,<br>
+=C2=A0 =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].<br>
+=C2=A0 PhD BEng(CompEng) FHKMetSoc MACM MIEEE<br>
+=C2=A0 Department of Computer Science,<br>
+=C2=A0 The University of Hong Kong.<br>
+<br>
+</blockquote></div>
+</div></blockquote></div><br></div></blockquote></div>
+
+--000000000000c2d71205d60d7d87--

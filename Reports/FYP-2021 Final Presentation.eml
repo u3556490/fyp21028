@@ -1,0 +1,533 @@
+Delivered-To: u3556490@connect.hku.hk
+Received: by 2002:a26:8f0b:0:0:0:0:0 with SMTP id r11csp1964773yad;
+        Sun, 24 Apr 2022 06:22:49 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw2AQ/gNmHsqs57z7J0TY3IgtRhBKaRYKgm6v5QgxYXuHk/4XlX8uNlGwH5ImTM4k7EoU2S
+X-Received: by 2002:a17:90a:af98:b0:1d4:67d4:d122 with SMTP id w24-20020a17090aaf9800b001d467d4d122mr15525277pjq.166.1650806569523;
+        Sun, 24 Apr 2022 06:22:49 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1650806569; cv=none;
+        d=google.com; s=arc-20160816;
+        b=HGphxVARqVu5XmYguKPPqCXRqeNht8oQyZW2m8ZHRmuFAwwpeJlfrqHSFkGPjhZYsP
+         zJi2SS+bTJWHrCaJSq4rmtvBmr/0jXRJHhKS3jDtwsT8gFDVY3VZ2jfkwM82aV9SFAg4
+         NNAmuvzX0NBkuNZ2PDNt9T7ghmH62/TKg/4adZsIZB06K/MWW4dTfgrkzL7c+hFKpunZ
+         M5IqAj4tiLz1ceS6uLcIHCWPcs5e7Ixn8WS7+CUe2jZMgl6Kx3A5kQBoj3Fy3n8sCzSS
+         iE3CEmiHMrM+wRCqkeZMNSfou6wGQFM0tSqfAon3mF3lg2nVjG6s+lSVFeM2qLcGrpBo
+         kbsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=references:to:cc:in-reply-to:date:subject:mime-version:message-id
+         :from:dkim-filter;
+        bh=OFpgv6zHDfz9BxrqJWk6JuY0AMoYM6ISFmPGISpOlss=;
+        b=xfxLGc8RLiGy3Zk/Pvk0E6jYcxv7zXzcvcFsZmEZAAc5l8H/rIS+tFxPIYdv6JBdYJ
+         C64eKy6zLCsGa5oYejjeN7fUroWtSDuGiqPbw19XPurKnj639ZQLcsfdO6ykeBSKnxSb
+         Tv7QwPTJZehjjVJewK6Ex1yd/cIxVdiZH89PNlVHumAG4AkMbAwU4akMRJop3fTCwICI
+         qkE8LSsQp7fi7F/VLS5xLBXLA8RsTfmMyF0J02CWwVVosRk+uen9F99oZe4PaPEBCHOC
+         //3aw96nkjvD6HFMXIEJlFgAQEJLtbEGNI6M40hactbgXxcSL4LiqCuIgevL9NKJAALm
+         fTmw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of clyip@cs.hku.hk designates 2001:ce0:2201:101:0:ffff:0:17 as permitted sender) smtp.mailfrom=clyip@cs.hku.hk
+Return-Path: <clyip@cs.hku.hk>
+Received: from mail7.hku.hk (mail7.hku.hk. [2001:ce0:2201:101:0:ffff:0:17])
+        by mx.google.com with ESMTPS id mh14-20020a17090b4ace00b001ce6da85d4csi13972703pjb.189.2022.04.24.06.22.48
+        for <u3556490@connect.hku.hk>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sun, 24 Apr 2022 06:22:49 -0700 (PDT)
+Received-SPF: pass (google.com: domain of clyip@cs.hku.hk designates 2001:ce0:2201:101:0:ffff:0:17 as permitted sender) client-ip=2001:ce0:2201:101:0:ffff:0:17;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of clyip@cs.hku.hk designates 2001:ce0:2201:101:0:ffff:0:17 as permitted sender) smtp.mailfrom=clyip@cs.hku.hk
+Received: from mail.cs.hku.hk (mail.cs.hku.hk [147.8.176.10])
+	by mail7.hku.hk (8.14.7/8.14.7) with ESMTP id 23ODMk02023512
+	for <u3556490@connect.hku.hk>; Sun, 24 Apr 2022 21:22:46 +0800
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail7.hku.hk 23ODMk02023512
+X-Spam-Status: No, No
+X-cs-MailScanner-Watermark: 1651411357.47537@GNhIb5ojmvLazj+EVOLEEw
+X-cs-MailScanner-From: clyip@cs.hku.hk
+X-cs-MailScanner-SpamScore: ssss
+X-cs-MailScanner-SpamCheck: not spam, SpamAssassin (not cached, score=4.843,
+	required 9, autolearn=disabled, HTML_MESSAGE 0.00, RCVD_IN_PBL 3.56,
+	RDNS_NONE 1.27, T_SPF_HELO_TEMPERROR 0.01)
+X-cs-MailScanner: Not scanned: please contact your Internet E-Mail Service Provider for details
+X-cs-MailScanner-ID: 23ODMaND3799986
+X-cs-MailScanner-Information: Please contact the ISP for more information
+Received: from intraguard2.cs.hku.hk (intraguard2.cs.hku.hk [147.8.176.29])
+	by mail.cs.hku.hk (8.15.2/8.15.2/Debian-10) with ESMTP id 23ODMaND3799986
+	for <u3556490@connect.hku.hk>; Sun, 24 Apr 2022 21:22:36 +0800
+X-IronPort-AV: E=Sophos;i="5.90,286,1643644800"; 
+   d="scan'208,217";a="31226"
+Received: from unknown (HELO smtpclient.apple) ([221.127.71.113])
+  by intraguard2.cs.hku.hk with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Apr 2022 21:22:37 +0800
+From: =?utf-8?B?IuiRieW/l+eriyBZSVAgQ2hpIExhcCBbQmV0YV0i?= <clyip@cs.hku.hk>
+Message-Id: <06996417-2838-4966-9D8C-93BE5903E522@cs.hku.hk>
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_B09EA860-316E-4FDC-BB69-8DF12E1D9086"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3696.80.82.1.1\))
+Subject: Re: FYP-2021: Final Presentation
+Date: Sun, 24 Apr 2022 21:22:35 +0800
+In-Reply-To: <CAM91Qt+du71tbuUH652Zf2s+T8Aw4UH4xMyPcCzd2tVi9R50Vw@mail.gmail.com>
+Cc: =?utf-8?B?IuiRieW/l+eriyBZaXAgQ2hpIExhcCBbQmV0YV0i?= <clyip@cs.hku.hk>,
+        =?utf-8?B?IuiUoee2uueTiiBDaG9pIFlpIEtpbmcgW0xvcmV0dGFdIg==?= <ykchoi@cs.hku.hk>
+To: =?utf-8?B?5pa55Z2H5q2jIEZvbmcgS3dhbiBDaGluZw==?= <u3556490@connect.hku.hk>
+References: <CAM91QtJVdGBQwC_tR-4JV=mnBKrQz3vEjFoKc2bR6Bvkti6-KQ@mail.gmail.com>
+ <569070AF-7010-4BC1-B5FB-AEE11775B489@cs.hku.hk>
+ <CADaSGny=t2c8FSGwUBN4FsPJmPfZcsPJdDPZFDrut5qEuNhodQ@mail.gmail.com>
+ <BE85976D-63F9-4387-9AEB-C08DD979C2CC@cs.hku.hk>
+ <CAM91Qt+du71tbuUH652Zf2s+T8Aw4UH4xMyPcCzd2tVi9R50Vw@mail.gmail.com>
+X-Mailer: Apple Mail (2.3696.80.82.1.1)
+X-MailScanner-Information: Services provided by HKU Information Technology Services
+X-HKUITS-MailScanner-ID: 23ODMk02023512
+X-MailScanner: 0
+X-MailScanner-From: clyip@cs.hku.hk
+
+
+--Apple-Mail=_B09EA860-316E-4FDC-BB69-8DF12E1D9086
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
+
+Hi,
+
+    Answers received.
+
+Regards,
+  =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].
+  PhD BEng(CompEng) FHKMetSoc MACM MIEEE
+  Department of Computer Science,
+  The University of Hong Kong.
+
+> On 23 Apr 2022, at 17:37, Fong, Kwan Ching <u3556490@connect.hku.hk> =
+wrote:
+>=20
+> Dear Dr Yip,
+>=20
+> Thank you for the feedback. I would like to add to the issues raised =
+my responses, which are as follows:
+>=20
+> > HKWW model's role
+> The tropical cyclone (TC) warning signal probability forecast by HKWW =
+is the nearest comparable model/forecaser/product this project has. =
+Therefore, it was used to check whether the baselines are showing =
+appropriate performance such that the comparison with experimental =
+models can be more sound.
+>=20
+> > The targets are not the same
+> Yes, the HKWW models have a simpler task than the models developed in =
+this project. However, there are some overlaps so it may still be =
+suitable. Moreover, the need to include a comparable baseline for the =
+baselines in the analysis is considered important, as it can serve as =
+some rough third-party verification of the project's outcomes.
+>=20
+> > Why the 0.87 estimate?
+> There are several factors taken into account:=20
+>   (1) The HKWW reported score of 0.845 may represent the best results =
+a traditional approach (no dynamical data) can normally get. This =
+assumes that HKWW is trustworthy.
+>   (2) The experimental models worked better than their baseline =
+counterparts, therefore, it can be argued that if HKWW used dynamical =
+data too, then the scores they would get would be above 0.845.=20
+>   (3) The score improvements obtained by switching datasets were =
+limited. The obtainable margin (in (2)) above 0.845 would not be as high =
+as 0.1.=20
+>   (4) The very high scores (0.93-0.96) obtained using 6500 =
+experimental samples may represent overfitting, the actual performance =
+of the ensemble obtained would likely be lower.=20
+>   (5) If there were more samples, then the high variance issue (in =
+(4)) could be corrected to some extent.
+>   (6) It was found that the models had better scores in general when =
+only 6500 samples were available than when 45000 were.=20
+>   (7) In fact, the scores the baseline models give should not be much =
+better than HKWW's, because the targets HKWW predict are ostensibly =
+easier to predict.
+> In conclusion, the best scores the experimental models and the =
+ensemble could obtain would be between 0.845 ((1), (2), (7)) and 0.93 =
+((3)-(6)). The 0.87 estimate was chosen to be conservative, because TC =
+behaviour is likely more erratic than statistical models can accurately =
+capture.
+>=20
+> > Is (the estimated) 0.87 score something you want to achieve?
+> Yes, but it depends on the interpretations of the question. If it =
+refers to the desirability of a score of 0.87 when there is sufficient =
+data, then I would say that score is indeed satisfactory, though further =
+improvements would be great. If it refers to some quantitative objective =
+set at the beginning of the project (e.g. the project is not considered =
+a success unless a score of 0.87 is reached), then I would say my answer =
+is undefined. At the onset of this project, no estimations about the =
+scores obtainable were ever made, as the correctness of the hypothesis =
+(statistical-dynamical approach is better) had yet been verified, nor =
+was the potential improvement margin understood.
+>=20
+> > Classification vs regression problem
+> The goal is to find some probabilities of an event happening. The =
+intuitive approach would be to consider the continuous probabilities as =
+a target to obtain via regression analysis. Alternatively, given that =
+the event's occurrence is binary and the input data is also labelled =
+with these binary options, the problem could also be treated as a =
+classification problem, where the models should identify whether the =
+event would occur (yes or no). The key here is to also make the =
+classifier produce a confidence score or a probability estimate. =
+Therefore, the task of finding the probabilities can be done both by =
+regression and classification. The disadvantages of either approach is =
+that regressors may predict values outside of [0,1] which cannot be =
+interpreted and classifiers may tend to predict values close to 0 or 1 =
+but nothing in between. The advantages are the inverse of the =
+disadvantages: regressors had slightly better probability calibration, =
+but classifiers were easier to develop, test and optimize. Much of this =
+project focused on classifiers because they were faster to develop and =
+usually had consistently good performance.
+>=20
+> > Linear model and generalized additive models (GAMs)
+> The main concept of GAM is to treat the target variable as a linear =
+combination of some inputs, which may in turn be a function approximated =
+using a number of splines, with some link function bridging between them =
+(i.e. the link function is applied to the linear combination to obtain =
+the predictions; ref.: Wikipedia =
+<https://en.wikipedia.org/wiki/Generalized_additive_model>, pyGAM =
+documentation =
+<https://pygam.readthedocs.io/en/latest/notebooks/tour_of_pygam.html>). =
+It overcomes the weakness of linear models like linear regression and =
+logistic regression where nonlinearities in the data are poorly =
+modelled. In this project, the term "linear model" was applied to the =
+general class of modelling methods that assume the output is some linear =
+combination of the input.
+>=20
+> > Time series modelling: exogenous variables used
+> The consideration was to rearrange the dataset into a time series-like =
+structure, so that the target (endogenous) variables corresponded to the =
+labels (Y) and the feature variables (X) were used directly as exogenous =
+variables without further selection. Nonetheless, very little was =
+actually done, e.g. the DIST00, DIST06, ..., DIST24 columns (TC center =
+radial distance from Hong Kong over the last 24 hours) were simply =
+brought together to give a DIST time series so the models could use =
+them. This was to minimize changes made to the datasets, especially the =
+columns, so that fairer comparisons were possible. The way the time =
+series models function prevents retrieval of feature/exogenous variable =
+importance values to further the analysis (e.g. filter out irrelevant =
+variables), because that option is missing in the API =
+<https://www.sktime.org/en/stable/api_reference/auto_generated/sktime.clas=
+sification.interval_based.TimeSeriesForestClassifier.html>.
+>=20
+> > Multilayer perceptron (MLP) training configurations
+> As many as 1000 epochs were allowed, but when training loss stopped =
+improving for 10 consecutive epochs the training procedure would be =
+halted. This was in accordance with scikit-learn's default MLP training =
+behaviour (documentation links: classifier =
+<https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.=
+MLPClassifier.html>, regressor =
+<https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.=
+MLPRegressor.html>).
+>=20
+> > MLP regressors seem to be disproportionately bad
+> This is because MLP regressors tended to overfit under the same =
+hyperparameter settings when compared to MLP classifiers. This may be =
+due to the models having different loss functions (mean squared error vs =
+log loss), so comparing with the same hyperparameter settings could be =
+unfair. Decreasing model complexity and strengthening regularization =
+were considered, but owing to time constraints (each MLP regressor took =
+about 3-6 hours to train, which made meticulous fine-tuning a =
+time-consuming task) little tests could be made.
+>=20
+> > Usability
+> An issue with the developed forecaster is that it is inconvenient for =
+its potential users. The dynamical data must be manually fetched from =
+the data source and manually preprocessed for each forecast, while =
+making the forecast itself involves going into the source code and =
+running the notebook cell by cell. If there were more automation and a =
+simple user interface, where the users may submit input data without =
+having to touch the source code (e.g. file uploads for dynamical data, =
+web form for TC position data, etc.), then it would be much more =
+convenient. The parameters of the models themselves are already fine and =
+do not require further tuning (unless a new dataset is available, thus =
+enabling further analyses, but this is in my opinion beyond the scope of =
+the forecaster's usability).
+>=20
+> Finally, the recorded video of the final presentation is here =
+<https://wp.cs.hku.hk/2021/fyp21028/wp-content/uploads/sites/192/final-pre=
+sentation.mp4> (backup link: here) =
+<https://drive.google.com/file/d/1Xucmezob-6fA8cgPjOLxuaVe0c-GXYt-/view?us=
+p=3Dsharing>. Additional information about the project, i.e. all source =
+code and reports, are available for your reference at GitHub =
+<https://github.com/u3556490/fyp21028>.
+>=20
+> If you have further questions, please do not hesitate to write back at =
+your nearest convenience.
+>=20
+> Best regards,
+> FONG Kwan Ching
+> Student
+>=20
+>=20
+> On Fri, Apr 22, 2022 at 4:05 PM "=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi =
+Lap [Beta]" <clyip@cs.hku.hk <mailto:clyip@cs.hku.hk>> wrote:
+> Hi,
+>=20
+>     Here it's the notes I jotted down for your final presentation.
+>=20
+> Regards,
+>   =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta]
+>   PhD BEng(CompEng) FHKMetSoc MACM MIEEE
+>   Department of Computer Science
+>   The University of Hong Kong
+>=20
+
+
+--Apple-Mail=_B09EA860-316E-4FDC-BB69-8DF12E1D9086
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=utf-8
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dutf-8"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><span=
+ style=3D"color: rgb(0, 0, 0); orphans: 2; widows: 2; =
+-webkit-text-decorations-in-effect: none; text-align: -webkit-auto; =
+font-family: Monaco;" class=3D"">Hi,</span><div class=3D""><div =
+style=3D"orphans: 2; widows: 2;" class=3D""><font color=3D"#000000" =
+face=3D"Monaco" class=3D""><span style=3D"caret-color: rgb(0, 0, 0);" =
+class=3D""><br class=3D""></span></font></div><div style=3D"orphans: 2; =
+widows: 2;" class=3D""><font color=3D"#000000" face=3D"Monaco" =
+class=3D""><span style=3D"caret-color: rgb(0, 0, 0);" class=3D"">&nbsp; =
+&nbsp; Answers received.</span></font></div><div class=3D""><div =
+style=3D"color: rgb(0, 0, 0); letter-spacing: normal; orphans: auto; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: =
+after-white-space;" class=3D""><div style=3D"color: rgb(0, 0, 0); =
+font-variant: normal; letter-spacing: normal; line-height: normal; =
+orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: =
+none; white-space: normal; widows: 2; word-spacing: 0px; =
+-webkit-text-stroke-width: 0px; word-wrap: break-word; =
+-webkit-nbsp-mode: space; -webkit-line-break: after-white-space;" =
+class=3D""><div style=3D"color: rgb(0, 0, 0); font-variant: normal; =
+letter-spacing: normal; line-height: normal; orphans: 2; text-align: =
+-webkit-auto; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: =
+after-white-space;" class=3D""><font face=3D"Monaco" class=3D""><span =
+class=3D"Apple-style-span" style=3D"border-collapse: separate; =
+font-variant-ligatures: normal; font-variant-east-asian: normal; =
+font-variant-position: normal; line-height: normal; border-spacing: 0px; =
+-webkit-text-decorations-in-effect: none;"><div style=3D"word-wrap: =
+break-word; -webkit-nbsp-mode: space; -webkit-line-break: =
+after-white-space;" class=3D""><span class=3D"Apple-style-span" =
+style=3D"border-collapse: separate; color: rgb(0, 0, 0); font-variant: =
+normal; letter-spacing: normal; line-height: normal; orphans: 2; =
+text-indent: 0px; text-transform: none; white-space: normal; widows: 2; =
+word-spacing: 0px; border-spacing: 0px; =
+-webkit-text-decorations-in-effect: none; -webkit-text-stroke-width: =
+0px;"><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; =
+-webkit-line-break: after-white-space;" class=3D""><span =
+class=3D"Apple-style-span" style=3D"border-collapse: separate; color: =
+rgb(0, 0, 0); font-variant: normal; letter-spacing: normal; line-height: =
+normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: 2; word-spacing: 0px; border-spacing: 0px; =
+-webkit-text-decorations-in-effect: none; -webkit-text-stroke-width: =
+0px;"><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; =
+-webkit-line-break: after-white-space;" class=3D""><span =
+class=3D"Apple-style-span" style=3D"border-collapse: separate; color: =
+rgb(0, 0, 0); font-variant: normal; letter-spacing: normal; line-height: =
+normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: 2; word-spacing: 0px; border-spacing: 0px; =
+-webkit-text-decorations-in-effect: none; -webkit-text-stroke-width: =
+0px;"><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; =
+-webkit-line-break: after-white-space;" class=3D""><div class=3D""><br =
+class=3D""></div><div class=3D"">Regards,</div><div class=3D"">&nbsp; =
+=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta].</div><div =
+class=3D"">&nbsp;&nbsp;PhD BEng(CompEng) FHKMetSoc MACM MIEEE</div><div =
+class=3D"">&nbsp;&nbsp;Department of Computer Science,</div><div =
+class=3D"">&nbsp; The University of Hong =
+Kong.</div></div></span></div></span></div></span></div></span></font></di=
+v></div></div>
+</div>
+<div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 23 Apr 2022, at 17:37, Fong, Kwan Ching &lt;<a =
+href=3D"mailto:u3556490@connect.hku.hk" =
+class=3D"">u3556490@connect.hku.hk</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div dir=3D"ltr" =
+class=3D""><div class=3D"">Dear Dr Yip,</div><div class=3D""><br =
+class=3D""></div><div class=3D"">Thank you for the feedback. I would =
+like to add=20
+to the issues raised my responses, which are as follows:</div><div =
+class=3D""><br class=3D""></div><div class=3D"">&gt; HKWW model's =
+role</div><div class=3D"">The tropical cyclone (TC) warning signal =
+probability forecast by HKWW is the nearest comparable =
+model/forecaser/product this project has. Therefore, it was used to =
+check whether the baselines are showing appropriate performance such =
+that the comparison with experimental models can be more sound.<br =
+class=3D""></div><div class=3D""><br class=3D""></div><div class=3D"">&gt;=
+ The targets are not the same</div><div class=3D"">Yes, the HKWW models =
+have a simpler task than the models developed in this project. However, =
+there are some overlaps so it may still be suitable. Moreover, the need =
+to include a comparable baseline for the baselines in the analysis is =
+considered important, as it can serve as some rough third-party =
+verification of the project's outcomes.<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">&gt; Why the 0.87 =
+estimate?<br class=3D""></div><div class=3D"">There are several factors =
+taken into account: <br class=3D""></div><div class=3D"">&nbsp; (1) The =
+HKWW reported score of 0.845 may represent the best results a =
+traditional approach (no dynamical data) can normally get. This assumes =
+that HKWW is trustworthy.<br class=3D""></div><div class=3D"">&nbsp; (2) =
+The experimental models worked better than their baseline counterparts, =
+therefore, it can be argued that if HKWW used dynamical data too, then =
+the scores they would get would be above 0.845. <br class=3D""></div><div =
+class=3D"">&nbsp; (3) The score improvements obtained by switching =
+datasets were limited. The obtainable margin (in (2)) above 0.845 would =
+not be as high as 0.1. <br class=3D""></div><div class=3D"">&nbsp; (4) =
+The very high scores (0.93-0.96) obtained using 6500 experimental =
+samples may represent overfitting, the actual performance of the =
+ensemble obtained would likely be lower. <br class=3D""></div><div =
+class=3D"">&nbsp; (5) If there were more samples, then the high variance =
+issue (in (4)) could be corrected to some extent.</div><div =
+class=3D"">&nbsp; (6) It was found that the models had better scores in =
+general when only 6500 samples were available than when 45000 were. <br =
+class=3D""></div><div class=3D"">&nbsp; (7) In fact, the scores the =
+baseline models give should not be much better than HKWW's, because the =
+targets HKWW predict are ostensibly easier to predict.<br =
+class=3D""></div><div class=3D"">In conclusion, the best scores the =
+experimental models and the ensemble could obtain would be between 0.845 =
+((1), (2), (7)) and 0.93 ((3)-(6)). The 0.87 estimate was chosen to be =
+conservative, because TC behaviour is likely more erratic than =
+statistical models can accurately capture.<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">&gt; Is (the estimated) =
+0.87 score something you want to achieve?</div><div class=3D"">Yes, but =
+it depends on the interpretations of the question. If it refers to the =
+desirability of a score of 0.87 when there is sufficient data, then I =
+would say that score is indeed satisfactory, though further improvements =
+would be great. If it refers to some quantitative objective set at the =
+beginning of the project (e.g. the project is not considered a success =
+unless a score of 0.87 is reached), then I would say my answer is =
+undefined. At the onset of this project, no estimations about the scores =
+obtainable were ever made, as the correctness of the hypothesis =
+(statistical-dynamical approach is better) had yet been verified, nor =
+was the potential improvement margin understood.<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">&gt; Classification vs =
+regression problem</div><div class=3D"">The goal is to find some =
+probabilities of an event happening. The intuitive approach would be to =
+consider the continuous probabilities as a target to obtain via =
+regression analysis. Alternatively, given that the event's occurrence is =
+binary and the input data is also labelled with these binary options, =
+the problem could also be treated as a classification problem, where the =
+models should identify whether the event would occur (yes or no). The =
+key here is to also make the classifier produce a confidence score or a =
+probability estimate. Therefore, the task of finding the probabilities =
+can be done both by regression and classification. The disadvantages of =
+either approach is that regressors may predict values outside of [0,1] =
+which cannot be interpreted and classifiers may tend to predict values =
+close to 0 or 1 but nothing in between. The advantages are the inverse =
+of the disadvantages: regressors had slightly better probability =
+calibration, but classifiers were easier to develop, test and optimize. =
+Much of this project focused on classifiers because they were faster to =
+develop and usually had consistently good performance.<br =
+class=3D""></div><div class=3D""><br class=3D""></div><div class=3D"">&gt;=
+ Linear model and generalized additive models (GAMs)<br =
+class=3D""></div><div class=3D"">The main concept of GAM is to treat the =
+target variable as a linear combination of some inputs, which may in =
+turn be a function approximated using a number of splines, with some =
+link function bridging between them (i.e. the link function is applied =
+to the linear combination to obtain the predictions; ref.: <a =
+href=3D"https://en.wikipedia.org/wiki/Generalized_additive_model" =
+target=3D"_blank" class=3D"">Wikipedia</a>, <a =
+href=3D"https://pygam.readthedocs.io/en/latest/notebooks/tour_of_pygam.htm=
+l" target=3D"_blank" class=3D"">pyGAM documentation</a>). It overcomes =
+the weakness of linear models like linear regression and logistic =
+regression where nonlinearities in the data are poorly modelled. In this =
+project, the term "linear model" was applied to the general class of =
+modelling methods that assume the output is some linear combination of =
+the input.<br class=3D""></div><div class=3D""><br class=3D""></div><div =
+class=3D"">&gt; Time series modelling: exogenous variables =
+used</div><div class=3D"">The consideration was to rearrange the dataset =
+into a time series-like structure, so that the target (endogenous) =
+variables corresponded to the labels (Y) and the feature variables (X) =
+were used directly as exogenous variables without further selection. =
+Nonetheless, very little was actually done, e.g. the DIST00, DIST06, =
+..., DIST24 columns (TC center radial distance from Hong Kong over the =
+last 24 hours) were simply brought together to give a DIST time series =
+so the models could use them. This was to minimize changes made to the =
+datasets, especially the columns, so that fairer comparisons were =
+possible. The way the time series models function prevents retrieval of =
+feature/exogenous variable importance values to further the analysis =
+(e.g. filter out irrelevant variables), because <a =
+href=3D"https://www.sktime.org/en/stable/api_reference/auto_generated/skti=
+me.classification.interval_based.TimeSeriesForestClassifier.html" =
+target=3D"_blank" class=3D"">that option is missing in the API</a>.<br =
+class=3D""></div><div class=3D""><br class=3D""></div><div class=3D"">&gt;=
+ Multilayer perceptron (MLP) training configurations</div><div =
+class=3D"">As many as 1000 epochs were allowed, but when training loss =
+stopped improving for 10 consecutive epochs the training procedure would =
+be halted. This was in accordance with scikit-learn's default MLP =
+training behaviour (documentation links: <a =
+href=3D"https://scikit-learn.org/stable/modules/generated/sklearn.neural_n=
+etwork.MLPClassifier.html" target=3D"_blank" class=3D"">classifier</a>, =
+<a =
+href=3D"https://scikit-learn.org/stable/modules/generated/sklearn.neural_n=
+etwork.MLPRegressor.html" target=3D"_blank" class=3D"">regressor</a>).<br =
+class=3D""></div><div class=3D""><br class=3D""></div><div class=3D"">&gt;=
+ MLP regressors seem to be disproportionately bad</div><div =
+class=3D"">This is because MLP regressors tended to overfit under the =
+same hyperparameter settings when compared to MLP classifiers. This may =
+be due to the models having different loss functions (mean squared error =
+vs log loss), so comparing with the same hyperparameter settings could =
+be unfair. Decreasing model complexity and strengthening regularization =
+were considered, but owing to time constraints (each MLP regressor took =
+about 3-6 hours to train, which made meticulous fine-tuning a =
+time-consuming task) little tests could be made.<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">&gt; Usability</div><div =
+class=3D"">An issue with the developed forecaster is that it is =
+inconvenient for its potential users. The dynamical data must be =
+manually fetched from the data source and manually preprocessed for each =
+forecast, while making the forecast itself involves going into the =
+source code and running the notebook cell by cell. If there were more =
+automation and a simple user interface, where the users may submit input =
+data without having to touch the source code (e.g. file uploads for =
+dynamical data, web form for TC position data, etc.), then it would be =
+much more convenient. The parameters of the models themselves are =
+already fine and do not require further tuning (unless a new dataset is =
+available, thus enabling further analyses, but this is in my opinion =
+beyond the scope of the forecaster's usability).<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">Finally, the recorded =
+video of the final presentation is <a =
+href=3D"https://wp.cs.hku.hk/2021/fyp21028/wp-content/uploads/sites/192/fi=
+nal-presentation.mp4" target=3D"_blank" class=3D"">here</a> (backup =
+link: <a =
+href=3D"https://drive.google.com/file/d/1Xucmezob-6fA8cgPjOLxuaVe0c-GXYt-/=
+view?usp=3Dsharing" target=3D"_blank" class=3D"">here)</a>. Additional =
+information about the project, i.e. all source code and reports, are =
+available for your reference at <a =
+href=3D"https://github.com/u3556490/fyp21028" target=3D"_blank" =
+class=3D"">GitHub</a>.</div><div class=3D""><br class=3D""></div><div =
+class=3D"">If you have further questions, please do not hesitate to =
+write back at your nearest convenience.<br class=3D""></div><div =
+class=3D""><br class=3D""></div><div class=3D"">Best regards,</div><div =
+class=3D"">FONG Kwan Ching</div><div class=3D"">Student</div><div =
+class=3D""><br class=3D""></div></div><br class=3D""><div =
+class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr =
+22, 2022 at 4:05 PM "=E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap [Beta]" =
+&lt;<a href=3D"mailto:clyip@cs.hku.hk" target=3D"_blank" =
+class=3D"">clyip@cs.hku.hk</a>&gt; wrote:<br class=3D""></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex"><div class=3D""><div =
+class=3D""><font face=3D"Monaco" class=3D""><span =
+style=3D"font-style:normal" class=3D"">Hi,</span></font></div><div =
+class=3D""><font face=3D"Monaco" class=3D""><span =
+style=3D"font-style:normal" class=3D""><br =
+class=3D""></span></font></div><div class=3D""><font face=3D"Monaco" =
+class=3D""><span style=3D"font-style:normal" class=3D"">&nbsp; &nbsp; =
+Here it's the notes I jotted down for your final =
+presentation.</span></font></div><div class=3D""><font face=3D"Monaco" =
+class=3D""><span style=3D"font-style:normal" class=3D""><br =
+class=3D""></span></font></div><div class=3D""><font face=3D"Monaco" =
+class=3D""><span style=3D"font-style:normal" =
+class=3D"">Regards,</span></font></div><div class=3D""><font =
+face=3D"Monaco" class=3D""><span style=3D"font-style:normal" =
+class=3D"">&nbsp; =E8=91=89=E5=BF=97=E7=AB=8B YIP Chi Lap =
+[Beta]</span></font></div><div class=3D""><font face=3D"Monaco" =
+class=3D""><span style=3D"font-style:normal" class=3D"">&nbsp; PhD =
+BEng(CompEng) FHKMetSoc MACM MIEEE</span></font></div><div =
+class=3D""><font face=3D"Monaco" class=3D""><span =
+style=3D"font-style:normal" class=3D"">&nbsp; Department of Computer =
+Science</span></font></div><div class=3D""><font face=3D"Monaco" =
+class=3D""><span style=3D"font-style:normal" class=3D"">&nbsp; The =
+University of Hong Kong</span></font></div><div class=3D""><font =
+face=3D"Monaco" class=3D""><span style=3D"font-style:normal" =
+class=3D""><br class=3D""></span></font></div><div =
+class=3D""></div></div><div class=3D""><div =
+class=3D""></div></div></blockquote></div>
+</div></blockquote></div><br class=3D""></div></body></html>=
+
+--Apple-Mail=_B09EA860-316E-4FDC-BB69-8DF12E1D9086--
